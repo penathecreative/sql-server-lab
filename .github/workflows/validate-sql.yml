@@ -1,0 +1,22 @@
+name: Validate SQL Files
+
+on:
+  push:
+    paths:
+      - "**.sql"
+  pull_request:
+    paths:
+      - "**.sql"
+
+jobs:
+  lint-sql:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Validate SQL with sqlfluff
+        uses: sqlfluff/sqlfluff-action@v1
+        with:
+          dialect: tsql
