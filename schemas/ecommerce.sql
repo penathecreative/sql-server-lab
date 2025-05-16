@@ -1,0 +1,31 @@
+CREATE DATABASE EcommerceDB;
+GO
+USE EcommerceDB;
+GO
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY,
+    Username NVARCHAR(100),
+    Email NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY IDENTITY,
+    ProductName NVARCHAR(255),
+    Price DECIMAL(10, 2),
+    Stock INT
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY IDENTITY,
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    OrderDate DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY IDENTITY,
+    OrderID INT FOREIGN KEY REFERENCES Orders(OrderID),
+    ProductID INT FOREIGN KEY REFERENCES Products(ProductID),
+    Quantity INT
+);

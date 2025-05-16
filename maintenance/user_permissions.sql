@@ -1,0 +1,8 @@
+USE EcommerceDB;
+
+CREATE LOGIN AppUser WITH PASSWORD = 'StrongP@ssword!';
+CREATE USER AppUser FOR LOGIN AppUser;
+
+GRANT SELECT, INSERT, UPDATE ON Users TO AppUser;
+GRANT SELECT, INSERT ON Orders TO AppUser;
+GRANT EXECUTE ON SCHEMA :: dbo TO AppUser;
